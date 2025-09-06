@@ -22,8 +22,6 @@ jobs:
       - name: Add banner image
         run: |
           mkdir -p assets
-          cp path/to/Samuel-Banner.png assets/Samuel-Banner.png
-
   
       - name: Commit changes
         run: |
