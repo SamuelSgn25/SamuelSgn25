@@ -1,26 +1,32 @@
-name: Generate Snake Animation
+name: Update Profile README
 
 on:
   schedule:
-    - cron: "0 0 * * *" # Génère tous les jours
-  workflow_dispatch:
+    - cron: '0 0 * * *' # Mise à jour quotidienne à minuit
+  workflow_dispatch: # Lancement manuel possible
 
 jobs:
-  build:
+  update-readme:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout
-        uses: actions/checkout@v2
+      - name: Checkout repository
+        uses: actions/checkout@v3
 
-      - name: Generate Snake
-        uses: Platane/snk@v3
-        with:
-          github_user_name: SamuelSgn25
-          outputs: dist/github-contribution-grid-snake.svg
+      - name: Configure Git
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
-      - name: Push Snake
-        uses: EndBug/add-and-commit@v9
-        with:
-          default_author: github_actions
-          message: "Generate snake animation"
-          add: "dist/github-contribution-grid-snake.svg"
+      # Étape 1 : Ajouter la bannière si elle n'existe pas encore
+      - name: Add banner image
+        run: |
+          mkdir -p assets
+          cp path/to/Samuel-Banner.png assets/Samuel-Banner.png
+
+      # Étape 3 : Commit et push les modifications
+      - name: Commit changes
+        run: |
+          git add .
+          git commit -m "Update README with Samuel-Banner" || echo "No changes to commit"
+          git push
