@@ -2,8 +2,8 @@ name: Update Profile README
 
 on:
   schedule:
-    - cron: '0 0 * * *' # Mise à jour quotidienne à minuit
-  workflow_dispatch: # Lancement manuel possible
+    - cron: '0 0 * * *'
+  workflow_dispatch:
 
 jobs:
   update-readme:
@@ -18,13 +18,13 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
-      # Étape 1 : Ajouter la bannière si elle n'existe pas encore
+
       - name: Add banner image
         run: |
           mkdir -p assets
           cp path/to/Samuel-Banner.png assets/Samuel-Banner.png
 
-      # Étape 3 : Commit et push les modifications
+  
       - name: Commit changes
         run: |
           git add .
